@@ -27,7 +27,7 @@ const LogedUserScreen = ({navigation}) => {
   };
 
   const getUserCity = async (latitude, longitude) => {
-    const key = ''
+    const key = 'AIzaSyB_P5-lmD49l0dkyvmTpnym69vO7X2MqOA';
     await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`,
     ).then(res => console.log('cidade? ', res.json()._bodyInit));

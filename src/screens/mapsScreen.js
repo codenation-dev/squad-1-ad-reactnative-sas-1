@@ -12,7 +12,7 @@ const mapsScreen = () => {
   useEffect(() => {
     setLocation(currentLocation);
     console.log(location, currentLocation);
-  });
+  }, [currentLocation, location]);
   return (
     <View style={styles.container}>
       <Text>Tela de mapa</Text>
