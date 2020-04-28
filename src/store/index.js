@@ -3,7 +3,7 @@ import {
   FETCH_USER_DATA,
   FETCH_DEVS_AROUND,
   OBTAIN_USER_LOCATION,
-} from '../actions/types';
+} from './actions/types';
 
 const initialState = {
   token: '',

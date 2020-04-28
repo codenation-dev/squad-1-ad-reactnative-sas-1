@@ -1,57 +1,40 @@
 import React from 'react';
-import {NavigationContainer, useLinking} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-
-import {reducer} from './src/redux';
-import LoginScreen from './src/screens/LoginScreen';
-import LogedUserScreen from './src/screens/LogedUserScreen';
-import userAroundMapScreen from './src/screens/userAroundMapScreen.js';
-import userAroundScreen from './src/screens/userAroundScreen.js';
-import userSearchDataScreen from './src/screens/userSearchedDataScreen.js';
-import mapsScreen from './src/screens/mapsScreen.js';
-
-const Stack = createStackNavigator();
+import {reducer} from './src/store';
+import AppNavigator from './src/router/AppNavigator';
+import AsyncStorage from '@react-native-community/async-storage';
+import SplashScreen from './src/screens/SplashScreen';
 
 const store = createStore(reducer);
 
 const App = () => {
-  return (
+  const [token, setToken] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    setLoading(true);
+    const getToken = async () => {
+      try {
+        const value = await AsyncStorage.getItem('token');
+        setToken(value);
+        setLoading(false);
+      } catch (e) {
+        setToken(null);
+        setLoading(false);
+      }
+    };
+
+    getToken();
+  }, []);
+
+  return loading ? (
+    <SplashScreen />
+  ) : (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="LoginScreen">
-          <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
-            options={{title: 'Login'}}
-          />
-          <Stack.Screen
-            name="LogedUserScreen"
-            component={LogedUserScreen}
-            options={{title: 'Loged Area'}}
-          />
-          <Stack.Screen
-            name="userAroundScreen"
-            component={userAroundScreen}
-            options={{title: 'Users Around Your Location'}}
-          />
-          <Stack.Screen
-            name="userAroundMapScreen"
-            component={userAroundMapScreen}
-            options={{title: 'Users Around Your location Map'}}
-          />
-          <Stack.Screen
-            name="userSearchDataScreen"
-            component={userSearchDataScreen}
-            options={{title: 'User Selected Data'}}
-          />
-          <Stack.Screen
-            name="mapsScreen"
-            component={mapsScreen}
-            options={{title: 'Map Screen Location'}}
-          />
-        </Stack.Navigator>
+        <AppNavigator token={token} />
       </NavigationContainer>
     </Provider>
   );

@@ -10,7 +10,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import Geolocation from 'react-native-geolocation-service';
 
-import {FETCH_DEVS_AROUND, OBTAIN_USER_LOCATION} from '../actions/types';
+import {FETCH_DEVS_AROUND, OBTAIN_USER_LOCATION} from '../store/actions/types';
 import ButtonComponent from '../components/Button';
 
 const LogedUserScreen = ({navigation}) => {
@@ -99,7 +99,7 @@ const LogedUserScreen = ({navigation}) => {
       <View>
         <ButtonComponent
           title="Developers Around Me"
-          func={() => getDevelopersAround()}
+          onPress={() => getDevelopersAround()}
         />
       </View>
 
