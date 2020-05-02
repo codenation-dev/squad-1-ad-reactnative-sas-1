@@ -1,40 +1,24 @@
-import {
-  GITHUB_LOGIN,
-  FETCH_USER_DATA,
-  FETCH_DEVS_AROUND,
-  OBTAIN_USER_LOCATION,
-} from './actions/types';
+import {createStore, compose, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-const initialState = {
-  token: '',
-  userData: {},
-  developersAround: {},
-  userLocation: {},
-};
+import rootReducer from './modules/rootReducer';
+import rootSaga from './modules/rootSaga';
 
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GITHUB_LOGIN:
-      return {
-        ...state,
-        token: action.token,
-      };
-    case FETCH_USER_DATA:
-      return {
-        ...state,
-        userData: action.userData,
-      };
-    case FETCH_DEVS_AROUND:
-      return {
-        ...state,
-        developersAround: action.developersAround,
-      };
-    case OBTAIN_USER_LOCATION:
-      return {
-        ...state,
-        userLocation: action.userLocation,
-      };
-    default:
-      return state;
-  }
-};
+const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null;
+
+const sagaMiddleware = createSagaMiddleware({
+  sagaMonitor,
+});
+
+const enhancer = __DEV__
+  ? compose(
+      console.tron.createEnhancer(),
+      applyMiddleware(sagaMiddleware),
+    )
+  : applyMiddleware(sagaMiddleware);
+
+const store = createStore(rootReducer, enhancer);
+
+sagaMiddleware.run(rootSaga);
+
+export default store;

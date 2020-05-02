@@ -1,18 +1,29 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../screens/Login';
-import LogedUserScreen from '../screens/LogedUserScreen';
+import Main from '../screens/Main';
 import userAroundMapScreen from '../screens/userAroundMapScreen.js';
 import userAroundScreen from '../screens/userAroundScreen.js';
 import userSearchDataScreen from '../screens/userSearchedDataScreen.js';
+import SplashScreen from '../screens/SplashScreen';
 import mapsScreen from '../screens/mapsScreen.js';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAuthToken} from '../store/modules/auth/actions';
 
-const AppNavigator = ({token}) => {
+const AppNavigator = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
   const Stack = createStackNavigator();
+
+  React.useEffect(() => {
+    dispatch(getAuthToken());
+  }, [dispatch]);
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      {token == null ? (
+      {auth.isLoading ? (
+        <Stack.Screen name="Loading" component={SplashScreen} />
+      ) : auth.token == null ? (
         <Stack.Screen
           name="Login"
           component={Login}
@@ -21,9 +32,9 @@ const AppNavigator = ({token}) => {
       ) : (
         <>
           <Stack.Screen
-            name="LogedUserScreen"
-            component={LogedUserScreen}
-            options={{title: 'Loged Area'}}
+            name="Main"
+            component={Main}
+            options={{title: 'Map View'}}
           />
           <Stack.Screen
             name="userAroundScreen"
