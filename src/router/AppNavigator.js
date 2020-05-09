@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../screens/Login';
 import Main from '../screens/Main';
-import userInfo from '../screens/userInfo'
+import UserInfo from '../screens/UserInfo'
 import userAroundMapScreen from '../screens/userAroundMapScreen.js';
 import userAroundScreen from '../screens/userAroundScreen.js';
 import userSearchDataScreen from '../screens/userSearchedDataScreen.js';
@@ -39,7 +39,7 @@ const AppNavigator = () => {
           />
           <Stack.Screen
             name="userInfo"
-            component={userInfo}
+            component={UserInfo}
             options={{title: 'Info User'}}
           />
           <Stack.Screen
