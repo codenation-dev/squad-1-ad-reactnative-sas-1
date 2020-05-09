@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   getProfileRequest,
@@ -11,7 +11,7 @@ import {PermissionsAndroid} from 'react-native';
 import ButtonComponent from '../../components/Button';
 import MapView from 'react-native-maps';
 
-const Main = () => {
+const Main = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
@@ -60,10 +60,12 @@ const Main = () => {
   return user.userProfile && user.userLocation ? (
     <>
       <View style={styles.header}>
-        <Image
-          source={{uri: user.userProfile.avatar_url}}
-          style={styles.avatar}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('userInfo')}>
+          <Image
+            source={{uri: user.userProfile.avatar_url}}
+            style={styles.avatar}
+          />
+        </TouchableOpacity>
       </View>
       <MapView
         style={styles.map}
