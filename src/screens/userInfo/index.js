@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Text, View} from 'react-native';
+import React from 'react';
+import {Text, View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 
 const userInfo = () => {
   return (
