@@ -8,6 +8,7 @@ import DeveloperAroundDetail from '../screens/DeveloperAroundDetail';
 // import userAroundMapScreen from '../screens/userAroundMapScreen.js';
 // import userAroundScreen from '../screens/userAroundScreen.js';
 // import userSearchDataScreen from '../screens/userSearchedDataScreen.js';
+import QrCodeScanner from '../screens/QrCodeScanner';
 import SplashScreen from '../screens/SplashScreen';
 // import mapsScreen from '../screens/mapsScreen.js';
 import {useDispatch, useSelector} from 'react-redux';
@@ -53,6 +54,11 @@ const AppNavigator = () => {
             name="DeveloperAroundDetail"
             component={DeveloperAroundDetail}
             options={{title: 'Developer Around Detail'}}
+          />
+          <Stack.Screen
+            name="QrCodeScanner"
+            component={QrCodeScanner}
+            options={{title: 'Qr Code Cammera'}}
           />
         </>
       )}

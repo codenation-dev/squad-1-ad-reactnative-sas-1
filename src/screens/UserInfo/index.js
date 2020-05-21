@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-const DeveloperAroundDetail = ({route}) => {
+const DeveloperAroundDetail = ({route, navigation}) => {
   const [developer, setDeveloper] = useState({});
   useEffect(() => {
     setDeveloper(route.params.userProfile);
@@ -21,7 +21,9 @@ const DeveloperAroundDetail = ({route}) => {
           </View>
           <View style={styles.actionContainer}>
             <Text style={styles.actionText}>Sign out</Text>
-            <Text style={styles.actionText}>Camera</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('QrCodeScanner')}>
+              <Text style={styles.actionText}>Camera</Text>
+            </TouchableOpacity>
           </View>
         </View>
       ) : (
