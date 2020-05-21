@@ -2,14 +2,15 @@
 import React, {useEffect} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {PermissionsAndroid} from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
+import MapView from 'react-native-maps';
+
+import ButtonComponent from '../../components/Button';
 import {
   getProfileRequest,
   getUserLocationSuccess,
 } from '../../store/modules/user/actions';
-import Geolocation from '@react-native-community/geolocation';
-import {PermissionsAndroid} from 'react-native';
-import ButtonComponent from '../../components/Button';
-import MapView from 'react-native-maps';
 
 const Main = ({navigation}) => {
   const dispatch = useDispatch();
@@ -57,10 +58,14 @@ const Main = ({navigation}) => {
     }
   };
 
+  const handlleUserProfile = user => {
+    navigation.navigate('userInfo', user);
+  };
+
   return user.userProfile && user.userLocation ? (
     <>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('userInfo')}>
+        <TouchableOpacity onPress={() => handlleUserProfile(user)}>
           <Image
             source={{uri: user.userProfile.avatar_url}}
             style={styles.avatar}
@@ -77,7 +82,10 @@ const Main = ({navigation}) => {
         }}
       />
       <View style={styles.footer}>
-        <ButtonComponent title="Find devs around" />
+        <ButtonComponent
+          title="Find devs around"
+          onPress={() => navigation.navigate('DevelopersAround')}
+        />
       </View>
     </>
   ) : (

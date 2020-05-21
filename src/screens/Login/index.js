@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-import ButtonComponent from '../../components/Button';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 import {useDispatch} from 'react-redux';
+
 import {signInRequest} from '../../store/modules/auth/actions';
+import ButtonComponent from '../../components/Button';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();

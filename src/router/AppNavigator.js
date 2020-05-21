@@ -2,12 +2,14 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../screens/Login';
 import Main from '../screens/Main';
-import userInfo from '../screens/userInfo'
-import userAroundMapScreen from '../screens/userAroundMapScreen.js';
-import userAroundScreen from '../screens/userAroundScreen.js';
-import userSearchDataScreen from '../screens/userSearchedDataScreen.js';
+import UserInfo from '../screens/UserInfo';
+import DevelopersAround from '../screens/DevelopersAround';
+import DeveloperAroundDetail from '../screens/DeveloperAroundDetail';
+// import userAroundMapScreen from '../screens/userAroundMapScreen.js';
+// import userAroundScreen from '../screens/userAroundScreen.js';
+// import userSearchDataScreen from '../screens/userSearchedDataScreen.js';
 import SplashScreen from '../screens/SplashScreen';
-import mapsScreen from '../screens/mapsScreen.js';
+// import mapsScreen from '../screens/mapsScreen.js';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAuthToken} from '../store/modules/auth/actions';
 
@@ -39,28 +41,18 @@ const AppNavigator = () => {
           />
           <Stack.Screen
             name="userInfo"
-            component={userInfo}
+            component={UserInfo}
             options={{title: 'Info User'}}
           />
           <Stack.Screen
-            name="userAroundScreen"
-            component={userAroundScreen}
-            options={{title: 'Users Around Your Location'}}
+            name="DevelopersAround"
+            component={DevelopersAround}
+            options={{title: 'Developers Around'}}
           />
           <Stack.Screen
-            name="userAroundMapScreen"
-            component={userAroundMapScreen}
-            options={{title: 'Users Around Your location Map'}}
-          />
-          <Stack.Screen
-            name="userSearchDataScreen"
-            component={userSearchDataScreen}
-            options={{title: 'User Selected Data'}}
-          />
-          <Stack.Screen
-            name="mapsScreen"
-            component={mapsScreen}
-            options={{title: 'Map Screen Location'}}
+            name="DeveloperAroundDetail"
+            component={DeveloperAroundDetail}
+            options={{title: 'Developer Around Detail'}}
           />
         </>
       )}
