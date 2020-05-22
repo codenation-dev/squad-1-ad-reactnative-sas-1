@@ -38,18 +38,15 @@ const DevelopersAroud = ({navigation}) => {
         `https://api.github.com/search/users?q=location:${cidade}&page=${currentPage}&per_page=10`,
       )
       .then(response => {
-        // handle success
         let arrDevs = response.data.items;
         setDevs(arrDevs);
       })
       .catch(function(error) {
-        // handle error
         console.log(error);
       });
   };
 
   const handleSelectedDev = developer => {
-    // setDev(developer);
     console.log('click', developer);
     navigation.navigate('DeveloperAroundDetail', developer);
   };
@@ -103,9 +100,8 @@ const DevelopersAroud = ({navigation}) => {
         </>
       )}
     </ScrollView>
-  ) : (
+  ) :
     <Spinner />
-    )
   );
 };
 

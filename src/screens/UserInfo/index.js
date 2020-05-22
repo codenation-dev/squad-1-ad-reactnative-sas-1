@@ -4,6 +4,7 @@ import QRCode from 'react-native-qrcode-svg';
 import {useDispatch} from 'react-redux';
 
 import {signOut} from '../../store/modules/auth/actions';
+import Spinner from '../../components/Spinner';
 
 const DeveloperAroundDetail = ({route, navigation}) => {
   const [developer, setDeveloper] = useState({});
@@ -34,7 +35,7 @@ const DeveloperAroundDetail = ({route, navigation}) => {
           </View>
         </View>
       ) : (
-        <Text>Loading</Text>
+        <Spinner />
       )}
     </View>
   );
