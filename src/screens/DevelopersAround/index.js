@@ -56,8 +56,7 @@ const DevelopersAroud = ({navigation}) => {
     getDevelopersAround(city, page);
   }, [city, latitude, longitude, page]);
 
-  return (
-    devs.length > 0 ? (
+  return devs.length > 0 ? (
     <ScrollView>
       <View style={styles.devsCountContainer}>
         <Text>We Found </Text>
@@ -82,25 +81,25 @@ const DevelopersAroud = ({navigation}) => {
         <Spinner />
       )}
       {devs.length === 10 ? (
-        <>
+        <View style={styles.page}>
           <TouchableOpacity onPress={() => setPage(page + 1)}>
-            <Text>Proxima</Text>
+            <Text style={styles.actionText}>Proxima</Text>
           </TouchableOpacity>
           {page !== 1 && (
             <TouchableOpacity onPress={() => setPage(page - 1)}>
-              <Text>Anterior</Text>
+              <Text style={styles.actionText}>Anterior</Text>
             </TouchableOpacity>
           )}
-        </>
+        </View>
       ) : (
-        <>
+        <View style={styles.page}>
           <TouchableOpacity onPress={() => setPage(page - 1)}>
-            <Text>Anterior</Text>
+            <Text style={styles.actionText}>Anterior</Text>
           </TouchableOpacity>
-        </>
+        </View>
       )}
     </ScrollView>
-  ) :
+  ) : (
     <Spinner />
   );
 };
@@ -136,6 +135,17 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 100,
+  },
+  page: {
+    marginTop: 70,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  actionText: {
+    color: '#006099',
+    fontSize: 20,
+    textDecorationLine: 'underline',
   },
 });
 
