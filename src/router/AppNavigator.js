@@ -35,6 +35,11 @@ const AppNavigator = () => {
         />
       ) : (
         <>
+          {/* <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{title: 'Login'}}
+          /> */}
           <Stack.Screen
             name="Main"
             component={Main}

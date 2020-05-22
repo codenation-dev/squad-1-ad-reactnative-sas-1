@@ -12,6 +12,8 @@ import {
   getUserLocationSuccess,
 } from '../../store/modules/user/actions';
 
+import Spinner from '../../components/Spinner';
+
 const Main = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -89,7 +91,7 @@ const Main = ({navigation}) => {
       </View>
     </>
   ) : (
-    <Text>Loading</Text>
+    <Spinner />
   );
 };
 

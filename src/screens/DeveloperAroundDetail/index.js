@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
+import Spinner from '../../components/Spinner';
+
 const DeveloperAroundDetail = ({route}) => {
   const [developer, setDeveloper] = useState({});
   useEffect(() => {
-    console.log(route.params);
     setDeveloper(route.params);
   }, [route.params]);
   return (
@@ -22,7 +23,7 @@ const DeveloperAroundDetail = ({route}) => {
           </View>
         </View>
       ) : (
-        <Text>Loading</Text>
+        <Spinner />
       )}
     </View>
   );

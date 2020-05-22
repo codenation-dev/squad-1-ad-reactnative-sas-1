@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {StyleSheet, Text, TouchableOpacity, Linking} from 'react-native';
 
@@ -27,11 +27,6 @@ const QrCodeScanner = ({navigation}) => {
       onRead={onSuccess}
       flashMode={RNCamera.Constants.FlashMode.torch}
       topContent={<Text style={styles.centerText}>Enquadre o QR code.</Text>}
-      bottomContent={
-        <TouchableOpacity style={styles.buttonTouchable}>
-          <Text style={styles.buttonText}>OK. Got it!</Text>
-        </TouchableOpacity>
-      }
     />
   );
 };

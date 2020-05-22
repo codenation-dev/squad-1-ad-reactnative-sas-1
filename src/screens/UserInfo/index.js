@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import {useDispatch} from 'react-redux';
+
+import {signOut} from '../../store/modules/auth/actions';
 
 const DeveloperAroundDetail = ({route, navigation}) => {
   const [developer, setDeveloper] = useState({});
+  const dispatch = useDispatch();
   useEffect(() => {
     setDeveloper(route.params.userProfile);
   }, [route.params]);
@@ -20,7 +24,9 @@ const DeveloperAroundDetail = ({route, navigation}) => {
             <QRCode value={developer.login} size={250} />
           </View>
           <View style={styles.actionContainer}>
-            <Text style={styles.actionText}>Sign out</Text>
+            <TouchableOpacity onPress={() => dispatch(signOut())}>
+              <Text style={styles.actionText}>Sign out</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('QrCodeScanner')}>
               <Text style={styles.actionText}>Camera</Text>
@@ -75,7 +81,6 @@ const styles = StyleSheet.create({
   },
   actionText: {
     color: '#006099',
-    // fontWeight: 'bold',
     fontSize: 20,
     textDecorationLine: 'underline',
   },
