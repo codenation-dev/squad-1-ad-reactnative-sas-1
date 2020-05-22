@@ -5,6 +5,7 @@ import QRCode from 'react-native-qrcode-svg';
 const DeveloperAroundDetail = ({route}) => {
   const [developer, setDeveloper] = useState({});
   useEffect(() => {
+    console.log(route.params);
     setDeveloper(route.params);
   }, [route.params]);
   return (

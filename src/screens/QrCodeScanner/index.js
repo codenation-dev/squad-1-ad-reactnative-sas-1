@@ -1,34 +1,32 @@
-import React, {Component} from 'react';
-
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Linking,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import {StyleSheet, Text, TouchableOpacity, Linking} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 
-const QrCodeScanner = () => {
-  onSuccess = e => {
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err),
-    );
+const QrCodeScanner = ({navigation}) => {
+  const [dev, setDev] = useState({});
+  const onSuccess = e => {
+    axios
+      .get(`https://api.github.com/search/users?q=user:${e.data}`)
+      .then(response => {
+        let developer = response.data.items[0];
+        setDev(developer);
+        console.log(developer);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    navigation.navigate('DeveloperAroundDetail', dev);
   };
 
   return (
     <QRCodeScanner
-      onRead={this.onSuccess}
+      onRead={onSuccess}
       flashMode={RNCamera.Constants.FlashMode.torch}
-      topContent={
-        <Text style={styles.centerText}>
-          Go to{' '}
-          <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-          your computer and scan the QR code.
-        </Text>
-      }
+      topContent={<Text style={styles.centerText}>Enquadre o QR code.</Text>}
       bottomContent={
         <TouchableOpacity style={styles.buttonTouchable}>
           <Text style={styles.buttonText}>OK. Got it!</Text>
@@ -36,7 +34,7 @@ const QrCodeScanner = () => {
       }
     />
   );
-}
+};
 
 const styles = StyleSheet.create({
   centerText: {
@@ -57,7 +55,5 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
-
-// AppRegistry.registerComponent('default', () => ScanScreen);
 
 export default QrCodeScanner;

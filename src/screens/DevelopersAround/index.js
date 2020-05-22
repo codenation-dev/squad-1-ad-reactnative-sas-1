@@ -14,7 +14,6 @@ const DevelopersAroud = ({navigation}) => {
   const [city, setCity] = useState('');
   const {latitude, longitude} = useSelector(state => state.user.userLocation);
   const [devs, setDevs] = useState([]);
-  const [dev, setDev] = useState({});
 
   const getUserCity = async (lat, long) => {
     const key = 'AIzaSyB_P5-lmD49l0dkyvmTpnym69vO7X2MqOA';
@@ -23,8 +22,9 @@ const DevelopersAroud = ({navigation}) => {
     )
       .then(res => res.json())
       .then(data => {
-        setCity(data.results[5].address_components[0].long_name);
-        console.log(data);
+        const currentCity = data.results[7].address_components[0].long_name;
+        setCity(currentCity);
+        console.log(currentCity);
       })
       .catch(err => console.log(err));
   };
@@ -49,18 +49,16 @@ const DevelopersAroud = ({navigation}) => {
     axios
       .get(`https://api.github.com/search/users?q=location:${cidade}`)
       .then(response => {
-        // handle success
         let arrDevs = response.data.items;
         setDevs(arrDevs);
+        console.log(arrDevs);
       })
       .catch(function(error) {
-        // handle error
         console.log(error);
       });
   };
 
   const handleSelectedDev = developer => {
-    // setDev(developer);
     console.log('click', developer);
     navigation.navigate('DeveloperAroundDetail', developer);
   };
@@ -71,7 +69,7 @@ const DevelopersAroud = ({navigation}) => {
   }, [city, latitude, longitude]);
 
   return (
-    <ScrollView>
+    <ScrollView /*horizontal={true} pagingEnabled={true}*/ scrollEventThrottle={10}>
       <View style={styles.devsCountContainer}>
         <Text>We Found </Text>
         <Text style={styles.counter}>{devs.length} devs</Text>

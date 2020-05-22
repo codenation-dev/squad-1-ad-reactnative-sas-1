@@ -21,7 +21,8 @@ const DeveloperAroundDetail = ({route, navigation}) => {
           </View>
           <View style={styles.actionContainer}>
             <Text style={styles.actionText}>Sign out</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('QrCodeScanner')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('QrCodeScanner')}>
               <Text style={styles.actionText}>Camera</Text>
             </TouchableOpacity>
           </View>
