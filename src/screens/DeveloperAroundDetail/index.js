@@ -11,7 +11,7 @@ const DeveloperAroundDetail = ({route}) => {
     axios
       .get(`https://api.github.com/users/${userName}`)
       .then(response => {
-        let arrDevs = response.data.items;
+        let arrDevs = response.data;
         setDeveloper(arrDevs);
       })
       .catch(function(error) {
@@ -21,10 +21,10 @@ const DeveloperAroundDetail = ({route}) => {
   const [developer, setDeveloper] = useState({});
   useEffect(() => {
     getDev(route.params.login);
-  }, [route.params.login]);
-  return (
-    <View style={styles.container}>
-      {developer ? (
+  }, [route.params]);
+  if (developer) {
+    return (
+      <View style={styles.container}>
         <View>
           <View style={styles.developer}>
             <Image source={{uri: developer.avatar_url}} style={styles.avatar} />
@@ -49,11 +49,11 @@ const DeveloperAroundDetail = ({route}) => {
             <QRCode value={developer.login} size={300} />
           </View>
         </View>
-      ) : (
-        <Spinner />
-      )}
-    </View>
-  );
+      </View>
+    );
+  } else {
+    return <Spinner />;
+  }
 };
 
 export default DeveloperAroundDetail;
