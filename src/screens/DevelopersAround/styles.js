@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
   devsCountContainer: {
     display: 'flex',
     margin: 20,
@@ -33,8 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   page: {
-    marginTop: 20,
-    marginBottom: 20,
+    paddingTop: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -43,6 +46,10 @@ const styles = StyleSheet.create({
     color: '#006099',
     fontSize: 20,
     textDecorationLine: 'underline',
+  },
+  safeArea: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
 });
 

@@ -1,13 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import {useSelector} from 'react-redux';
-import axios from 'axios';
 import styles from './styles';
-
+import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 
 const DevelopersAroud = ({navigation}) => {
   const [city, setCity] = useState('');
+  const [load, setLoad] = useState(true);
   const {latitude, longitude} = useSelector(state => state.user.userLocation);
   const [devs, setDevs] = useState([]);
   const [page, setPage] = useState(1);
@@ -26,14 +33,13 @@ const DevelopersAroud = ({navigation}) => {
   };
 
   const getDevelopersAround = (cidade, currentPage) => {
-    setDevs([]);
-    axios
-      .get(
-        `https://api.github.com/search/users?q=location:${cidade}&page=${currentPage}&per_page=9`,
-      )
+    setLoad(false);
+    api
+      .get(`search/users?q=location:${cidade}&page=${currentPage}&per_page=10`)
       .then(response => {
         let arrDevs = response.data.items;
         setDevs(arrDevs);
+        setLoad(true);
       })
       .catch(function(error) {
         console.log(error);
@@ -41,7 +47,6 @@ const DevelopersAroud = ({navigation}) => {
   };
 
   const handleSelectedDev = developer => {
-    console.log('click', developer);
     navigation.navigate('DeveloperAroundDetail', developer);
   };
 
@@ -50,7 +55,7 @@ const DevelopersAroud = ({navigation}) => {
     getDevelopersAround(city, page);
   }, [city, latitude, longitude, page]);
 
-  return devs.length > 0 ? (
+  return load ? (
     <ScrollView>
       <View style={styles.devsCountContainer}>
         <Text>We Found </Text>
@@ -74,24 +79,30 @@ const DevelopersAroud = ({navigation}) => {
       ) : (
         <Spinner />
       )}
-      {devs.length === 9 ? (
-        <View style={styles.page}>
-          <TouchableOpacity onPress={() => setPage(page + 1)}>
-            <Text style={styles.actionText}>Proxima</Text>
-          </TouchableOpacity>
-          {page !== 1 && (
+      <SafeAreaView style={styles.safeArea}>
+        {devs.length >= 10 ? (
+          <View style={styles.page}>
+            <TouchableOpacity
+              onPress={() => {
+                setPage(page + 1);
+                setLoad(false);
+              }}>
+              <Text style={styles.actionText}>Proxima</Text>
+            </TouchableOpacity>
+            {page !== 1 && (
+              <TouchableOpacity onPress={() => setPage(page - 1)}>
+                <Text style={styles.actionText}>Anterior</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        ) : (
+          <View style={styles.page}>
             <TouchableOpacity onPress={() => setPage(page - 1)}>
               <Text style={styles.actionText}>Anterior</Text>
             </TouchableOpacity>
-          )}
-        </View>
-      ) : (
-        <View style={styles.page}>
-          <TouchableOpacity onPress={() => setPage(page - 1)}>
-            <Text style={styles.actionText}>Anterior</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+          </View>
+        )}
+      </SafeAreaView>
     </ScrollView>
   ) : (
     <Spinner />
