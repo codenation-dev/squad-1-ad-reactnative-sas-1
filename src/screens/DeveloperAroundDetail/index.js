@@ -8,7 +8,6 @@ import Spinner from '../../components/Spinner';
 
 const DeveloperAroundDetail = ({route}) => {
   const getDev = userName => {
-    setDeveloper({});
     axios
       .get(`https://api.github.com/users/${userName}`)
       .then(response => {
