@@ -29,7 +29,7 @@ const DevelopersAroud = ({navigation}) => {
     setDevs([]);
     axios
       .get(
-        `https://api.github.com/search/users?q=location:${cidade}&page=${currentPage}&per_page=10`,
+        `https://api.github.com/search/users?q=location:${cidade}&page=${currentPage}&per_page=9`,
       )
       .then(response => {
         let arrDevs = response.data.items;
@@ -74,7 +74,7 @@ const DevelopersAroud = ({navigation}) => {
       ) : (
         <Spinner />
       )}
-      {devs.length === 10 ? (
+      {devs.length === 9 ? (
         <View style={styles.page}>
           <TouchableOpacity onPress={() => setPage(page + 1)}>
             <Text style={styles.actionText}>Proxima</Text>

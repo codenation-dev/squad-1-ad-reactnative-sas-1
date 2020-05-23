@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   page: {
-    marginTop: 70,
+    marginTop: 20,
+    marginBottom: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
