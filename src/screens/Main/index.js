@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {PermissionsAndroid} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import MapView from 'react-native-maps';
+import styles from './styles';
 
 import ButtonComponent from '../../components/Button';
 import {
@@ -96,33 +97,3 @@ const Main = ({navigation}) => {
 };
 
 export default Main;
-
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: 'rgba(197, 226, 238, 0.4)',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    padding: 20,
-    zIndex: 1,
-    display: 'flex',
-    alignItems: 'flex-end',
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 50,
-    width: '100%',
-    zIndex: 1,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  map: {
-    flex: 1,
-    position: 'relative',
-  },
-  avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 100,
-  },
-});
