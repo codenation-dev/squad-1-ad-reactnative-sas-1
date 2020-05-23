@@ -5,12 +5,8 @@ import Main from '../screens/Main';
 import UserInfo from '../screens/UserInfo';
 import DevelopersAround from '../screens/DevelopersAround';
 import DeveloperAroundDetail from '../screens/DeveloperAroundDetail';
-// import userAroundMapScreen from '../screens/userAroundMapScreen.js';
-// import userAroundScreen from '../screens/userAroundScreen.js';
-// import userSearchDataScreen from '../screens/userSearchedDataScreen.js';
 import QrCodeScanner from '../screens/QrCodeScanner';
 import SplashScreen from '../screens/SplashScreen';
-// import mapsScreen from '../screens/mapsScreen.js';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAuthToken} from '../store/modules/auth/actions';
 
@@ -35,11 +31,6 @@ const AppNavigator = () => {
         />
       ) : (
         <>
-          {/* <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{title: 'Login'}}
-          /> */}
           <Stack.Screen
             name="Main"
             component={Main}

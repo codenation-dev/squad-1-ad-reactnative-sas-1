@@ -27,7 +27,6 @@ const DevelopersAroud = ({navigation}) => {
       .then(res => res.json())
       .then(data => {
         setCity(data.results[5].address_components[0].long_name);
-        console.log(data);
       })
       .catch(err => console.log(err));
   };
