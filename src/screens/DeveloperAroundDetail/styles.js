@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   link: {
     color: 'white',
     fontSize: 18,
-    paddingBottom: 36,
+    paddingBottom: 5,
   },
   codeContainer: {
     paddingTop: 25,
@@ -32,6 +32,19 @@ const styles = StyleSheet.create({
     width: 110,
     height: 110,
     borderRadius: 100,
+  },
+  infoContainer: {
+    paddingBottom: 36,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  infoText: {
+    color: 'white',
+    fontSize: 12,
+    marginLeft: 10,
+  },
+  counter: {
+    color: 'white',
   },
 });
 
